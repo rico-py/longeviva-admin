@@ -102,7 +102,7 @@ class _SimpleAuthWrapperState extends State<SimpleAuthWrapper> {
 
               // Loading text
               Text(
-                'Checking authentication...',
+                'Verifica autenticazione in corso...',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 16,
@@ -114,7 +114,7 @@ class _SimpleAuthWrapperState extends State<SimpleAuthWrapper> {
               SizedBox(height: 8),
 
               Text(
-                'Please wait',
+                'Attendere',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 14,

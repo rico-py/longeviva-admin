@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../backend/bloc/signup_request_bloc.dart';
 import '../../../../shared/utils/context_extensions.dart';
+import '../../../../shared/localization/translation_extension.dart';
 import '../view_model/signup_requests_large_screen_view_model.dart';
 import '../view_model/signup_requests_small_screen_view_model.dart';
 
@@ -33,11 +34,15 @@ class _SignupRequestsLandingPageState extends State<SignupRequestsLandingPage>
     return BlocListener<SignupRequestBloc, SignupRequestState>(
       listener: (context, state) {
         if (state is SignupRequestApproved) {
-          context.showSuccessAlert('Signup request approved successfully');
+          context.showSuccessAlert('Richiesta approvata con successo');
         } else if (state is SignupRequestRejected) {
-          context.showSuccessAlert('Signup request rejected successfully');
+          context.showSuccessAlert('Richiesta rifiutata con successo');
         } else if (state is SignupRequestError) {
-          context.showErrorAlert(state.message);
+          final key = state.translationKey;
+          final translated = key != null ? context.tr(key, args: state.translationArgs) : null;
+          context.showErrorAlert(
+            translated != null && translated != key ? translated : state.message,
+          );
         }
       },
       child: LayoutBuilder(

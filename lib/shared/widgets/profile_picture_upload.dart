@@ -82,7 +82,7 @@ class _ProfilePictureUploadState extends State<ProfilePictureUpload> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          isLoading ? 'Processing...' : 'Upload new photo',
+                          isLoading ? 'Elaborazione...' : 'Carica nuova foto',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 14,
@@ -101,7 +101,7 @@ class _ProfilePictureUploadState extends State<ProfilePictureUpload> {
                   const SizedBox(height: 24),
                   // Image requirements
                   Text(
-                    'At least 800x800 px recommended.',
+                    'Consigliati almeno 800x800 px.',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -109,7 +109,7 @@ class _ProfilePictureUploadState extends State<ProfilePictureUpload> {
                     ),
                   ),
                   Text(
-                    'JPG, JPEG or PNG is allowed',
+                    'Sono ammessi JPG, JPEG o PNG',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -192,14 +192,14 @@ class _ProfilePictureUploadState extends State<ProfilePictureUpload> {
           } else {
             // Show error message for invalid image
             if (mounted) {
-              context.showErrorAlert('Invalid image file. Please select a JPG, JPEG or PNG file.');
+              context.showErrorAlert('File immagine non valido. Seleziona un file JPG, JPEG o PNG.');
             }
           }
         }
       }
     } catch (e) {
       if (mounted) {
-        context.showErrorAlert('Error selecting image: $e');
+        context.showErrorAlert('Errore nella selezione dell\'immagine: $e');
       }
     } finally {
       if (mounted) {

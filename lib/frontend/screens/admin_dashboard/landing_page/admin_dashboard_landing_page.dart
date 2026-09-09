@@ -124,9 +124,9 @@ class _AdminDashboardLandingPageState
       case 0:
         return 'Dashboard';
       case 1:
-        return 'Signup Requests';
+        return 'Richieste di registrazione';
       case 2:
-        return 'User Management';
+        return 'Gestione utenti';
       case 3:
         return 'Rituali';
       case 4:

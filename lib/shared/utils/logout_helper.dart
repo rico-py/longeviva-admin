@@ -30,7 +30,7 @@ class LogoutHelper {
             ),
             const SizedBox(width: 12),
             const Text(
-              'Confirm Logout',
+              'Confermi il logout',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class LogoutHelper {
           ],
         ),
         content: const Text(
-          'Are you sure you want to sign out of the admin portal?',
+          'Confermi di voler uscire dal portale amministratore?',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 14,
@@ -51,7 +51,7 @@ class LogoutHelper {
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
             child: const Text(
-              'Cancel',
+              'Annulla',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 color: Colors.grey,
@@ -74,7 +74,7 @@ class LogoutHelper {
               color: Colors.white,
             ),
             label: const Text(
-              'Sign Out',
+              'Esci',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class LogoutHelper {
             )
                 : const Icon(Icons.logout, size: 16),
             label: Text(
-              isLoading ? 'Signing out...' : 'Sign Out',
+              isLoading ? 'Uscita in corso...' : 'Esci',
               style: const TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
@@ -153,7 +153,7 @@ class LogoutHelper {
               Icons.logout,
               color: CustomColors.rossoSimone,
             ),
-            tooltip: 'Sign Out',
+            tooltip: 'Esci',
           );
         }
       },

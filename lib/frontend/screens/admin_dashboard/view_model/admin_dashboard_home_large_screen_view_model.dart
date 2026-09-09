@@ -452,7 +452,7 @@ class _HomeContent extends StatelessWidget {
                       const SizedBox(width: 24),
                       Expanded(
                         child: _snapshotBar(
-                          'Pending',
+                          'In attesa',
                           pending.length,
                           allRequests.length,
                           Colors.orange,

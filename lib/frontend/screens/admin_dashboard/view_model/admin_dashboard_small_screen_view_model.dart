@@ -146,7 +146,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
               ),
               const Divider(color: Colors.white30),
               _buildDrawerItem(
-                title: 'Logout',
+                title: 'Esci',
                 icon: Icons.logout,
                 index: -1, // Special index for logout
                 isLogout: true,
@@ -247,7 +247,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
-          'Confirm Logout',
+          'Confermi il logout',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
@@ -255,7 +255,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
           ),
         ),
         content: const Text(
-          'Are you sure you want to log out?',
+          'Confermi di voler uscire?',
           style: TextStyle(
             fontFamily: 'Montserrat',
           ),
@@ -264,7 +264,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
             child: const Text(
-              'Cancel',
+              'Annulla',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 color: Colors.grey,
@@ -286,7 +286,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
               Navigator.of(context).pushNamedAndRemoveUntil('/admin_login', (route) => false);
             },
             child: const Text(
-              'Logout',
+              'Esci',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,

@@ -78,42 +78,42 @@ class SecurePasswordGenerator {
     if (value == null || value.isEmpty) {
       return ValidationResult(
         isValid: !isRequired,
-        errorMessage: isRequired ? 'Password is required' : null,
+        errorMessage: isRequired ? 'La password è obbligatoria' : null,
       );
     }
 
     if (value.length < 8) {
       return ValidationResult(
         isValid: false,
-        errorMessage: 'Password must be at least 8 characters long',
+        errorMessage: 'La password deve contenere almeno 8 caratteri',
       );
     }
 
     if (!RegExp(r'[a-z]').hasMatch(value)) {
       return ValidationResult(
         isValid: false,
-        errorMessage: 'Password must contain at least one lowercase letter',
+        errorMessage: 'La password deve contenere almeno una lettera minuscola',
       );
     }
 
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
       return ValidationResult(
         isValid: false,
-        errorMessage: 'Password must contain at least one uppercase letter',
+        errorMessage: 'La password deve contenere almeno una lettera maiuscola',
       );
     }
 
     if (!RegExp(r'\d').hasMatch(value)) {
       return ValidationResult(
         isValid: false,
-        errorMessage: 'Password must contain at least one number',
+        errorMessage: 'La password deve contenere almeno un numero',
       );
     }
 
     if (!RegExp(r'[@$!%*?&]').hasMatch(value)) {
       return ValidationResult(
         isValid: false,
-        errorMessage: 'Password must contain at least one special character (@\$!%*?&)',
+        errorMessage: 'La password deve contenere almeno un carattere speciale (@\$!%*?&)',
       );
     }
 
@@ -160,12 +160,12 @@ class SecurePasswordGenerator {
   static String getPasswordStrengthDescription(String password) {
     final strength = getPasswordStrength(password);
 
-    if (strength >= 90) return 'Excellent';
-    if (strength >= 75) return 'Very Strong';
-    if (strength >= 60) return 'Strong';
-    if (strength >= 40) return 'Moderate';
-    if (strength >= 20) return 'Weak';
-    return 'Very Weak';
+    if (strength >= 90) return 'Eccellente';
+    if (strength >= 75) return 'Molto forte';
+    if (strength >= 60) return 'Forte';
+    if (strength >= 40) return 'Moderata';
+    if (strength >= 20) return 'Debole';
+    return 'Molto debole';
   }
 
   /// Unified password validation for UI consistency

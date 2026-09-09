@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../backend/models/doctor/doctor_model.dart';
 import '../../../../../shared/utils/colors.dart';
 import '../../../../../shared/utils/context_extensions.dart';
+import '../../../../../shared/localization/translation_extension.dart';
 import '../../../../../shared/widgets/custom_progress_indicator.dart';
 import '../../../../backend/bloc/admin_bloc.dart';
 
@@ -110,7 +111,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: 'Search by name or email...',
+              hintText: 'Cerca per nome o email...',
               prefixIcon: const Icon(Icons.search),
               suffixIcon: _searchQuery.isNotEmpty
                   ? IconButton(
@@ -146,7 +147,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
               },
               icon: const Icon(Icons.refresh, color: Colors.white),
               label: const Text(
-                'Refresh User List',
+                'Aggiorna elenco utenti',
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
@@ -173,9 +174,9 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                 borderRadius: BorderRadius.circular(8),
               ),
               tabs: const [
-                Tab(text: 'All Users'),
-                Tab(text: 'Doctors'),
-                Tab(text: 'Patients'),
+                Tab(text: 'Tutti gli utenti'),
+                Tab(text: 'Dottori'),
+                Tab(text: 'Pazienti'),
               ],
             ),
           ),
@@ -187,16 +188,24 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
             child: BlocConsumer<AdminOperationsBloc, AdminOperationsState>(
               listener: (context, state) {
                 if (state is OperationSuccess) {
-                  context.showSuccessAlert(state.message);
+                  final key = state.translationKey;
+                  final translated = key != null ? context.tr(key) : null;
+                  context.showSuccessAlert(
+                    translated != null && translated != key ? translated : state.message,
+                  );
                 } else if (state is OperationFailure) {
-                  context.showErrorAlert(state.error);
+                  final key = state.translationKey;
+                  final translated = key != null ? context.tr(key, args: state.translationArgs) : null;
+                  context.showErrorAlert(
+                    translated != null && translated != key ? translated : state.error,
+                  );
                 }
               },
               builder: (context, state) {
                 if (state is AdminOperationsLoading) {
                   return const Center(
                     child: CustomProgressIndicator(
-                      message: "Loading users...",
+                      message: "Caricamento utenti in corso...",
                     ),
                   );
                 } else if (state is AllUsersLoaded) {
@@ -237,7 +246,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
 
                 // Default state or error state
                 return const Center(
-                  child: Text('No data available'),
+                  child: Text('Nessun dato disponibile'),
                 );
               },
             ),
@@ -260,7 +269,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
             ),
             const SizedBox(height: 16),
             Text(
-              'No users found',
+              'Nessun utente trovato',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 18,
@@ -277,7 +286,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                   });
                 },
                 icon: const Icon(Icons.clear),
-                label: const Text('Clear search'),
+                label: const Text('Cancella ricerca'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey[300],
                   foregroundColor: Colors.black87,
@@ -369,7 +378,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                         Row(
                           children: [
                             Text(
-                              capitalize(userType),
+                              userType == 'doctor' ? 'Dottore' : userType == 'patient' ? 'Paziente' : capitalize(userType),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[600],
@@ -434,7 +443,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      user['email'] ?? 'No email available',
+                      user['email'] ?? 'Nessuna email disponibile',
                       style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 13,
@@ -561,7 +570,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(
-                      'User Details',
+                      'Dettagli utente',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 20,
@@ -586,52 +595,52 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildDetailItem('Name', '${user['name']} ${user['surname'] ?? ''}'),
-                      _buildDetailItem('Email', user['email'] ?? 'N/A'),
-                      _buildDetailItem('User Type', capitalize(userType)),
+                      _buildDetailItem('Nome', '${user['name']} ${user['surname'] ?? ''}'),
+                      _buildDetailItem('Email', user['email'] ?? 'N/D'),
+                      _buildDetailItem('Tipo utente', userType == 'doctor' ? 'Dottore' : userType == 'patient' ? 'Paziente' : capitalize(userType)),
 
                       if (userType == 'doctor') ...[
                         // UPDATED: Show all roles instead of single role
-                        _buildDetailItem('Role(s)', userRoles.join(', ')),
-                        _buildDetailItem('Specialty', user['specialty'] ?? 'N/A'),
+                        _buildDetailItem('Ruoli', userRoles.join(', ')),
+                        _buildDetailItem('Specialità', user['specialty'] ?? 'N/D'),
                         if (user['cityOfWork'] != null)
-                          _buildDetailItem('City of Work', user['cityOfWork']),
+                          _buildDetailItem('Città di lavoro', user['cityOfWork']),
                         // NEW: Show country of work
                         if (user['countryOfWork'] != null)
-                          _buildDetailItem('Country of Work', user['countryOfWork']),
+                          _buildDetailItem('Paese di lavoro', user['countryOfWork']),
                         // NEW: Show professional registration numbers
                         if (user['numero_iscrizione_albo'] != null)
-                          _buildDetailItem('Registration (Albo)', user['numero_iscrizione_albo']),
+                          _buildDetailItem('Iscrizione (Albo)', user['numero_iscrizione_albo']),
                         if (user['numero_iscrizione_ente'] != null)
-                          _buildDetailItem('Registration (Ente)', user['numero_iscrizione_ente']),
+                          _buildDetailItem('Iscrizione (Ente)', user['numero_iscrizione_ente']),
                         // Certification data (current format)
                         if (user['registrationEntityType'] != null &&
                             user['registrationEntityType'].toString().isNotEmpty)
-                          _buildDetailItem('Certification Type',
+                          _buildDetailItem('Tipo di certificazione',
                               _registrationEntityTypeLabel(user['registrationEntityType'])),
                         if (user['registrationValue'] != null &&
                             user['registrationValue'].toString().isNotEmpty)
-                          _buildDetailItem('Issuing Institution', user['registrationValue']),
+                          _buildDetailItem('Ente di rilascio', user['registrationValue']),
                         // LEGACY: Show issuer
                         if (user['issuer'] != null && user['issuer'].toString().isNotEmpty)
-                          _buildDetailItem('Qualification Issuer', user['issuer']),
+                          _buildDetailItem('Ente rilascio qualifica', user['issuer']),
                         // NEW: Show hourly fees
                         if (user['hourlyFees'] != null)
-                          _buildDetailItem('Hourly Fees', user['hourlyFees'] > 0
+                          _buildDetailItem('Tariffa oraria', user['hourlyFees'] > 0
                               ? '€${user['hourlyFees'].toStringAsFixed(2)}'
-                              : 'Not specified'),
+                              : 'Non specificata'),
                         // NEW: Show languages spoken
                         if (user['languagesSpoken'] != null && user['languagesSpoken'] is List)
-                          _buildDetailItem('Languages', (user['languagesSpoken'] as List).join(', ')),
+                          _buildDetailItem('Lingue', (user['languagesSpoken'] as List).join(', ')),
                         // NEW: Show area of interest
                         if (user['areaOfInterest'] != null && user['areaOfInterest'].toString().isNotEmpty)
-                          _buildDetailItem('Area of Interest', user['areaOfInterest']),
+                          _buildDetailItem('Area di interesse', user['areaOfInterest']),
                         // NEW: Show VAT number
                         if (user['vatNumber'] != null && user['vatNumber'].toString().isNotEmpty)
-                          _buildDetailItem('VAT Number', user['vatNumber']),
+                          _buildDetailItem('Partita IVA', user['vatNumber']),
                         // NEW: Show fiscal code
                         if (user['fiscalCode'] != null && user['fiscalCode'].toString().isNotEmpty)
-                          _buildDetailItem('Fiscal Code', user['fiscalCode']),
+                          _buildDetailItem('Codice fiscale', user['fiscalCode']),
                       ],
 
                       const SizedBox(height: 16),
@@ -646,7 +655,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                           },
                           icon: const Icon(Icons.delete, color: CustomColors.rossoSimone),
                           label: const Text(
-                            'Delete User',
+                            'Elimina utente',
                             style: TextStyle(
                               color: CustomColors.rossoSimone,
                               fontFamily: 'Montserrat',
@@ -699,7 +708,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
   void _showDeleteConfirmation(BuildContext context, String userId, String userType) {
     context.showAnimatedDialog(
       dialogBuilder: (context) => AlertDialog(
-        title: const Text('Confirm User Deletion'),
+        title: const Text('Confermi l\'eliminazione'),
         content: RichText(
           text: TextSpan(
             style: const TextStyle(
@@ -708,19 +717,19 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
               color: Colors.black87,
             ),
             children: [
-              const TextSpan(text: 'Are you sure you want to delete this '),
+              const TextSpan(text: 'Confermi di voler eliminare questo/a '),
               TextSpan(
-                text: userType,
+                text: userType == 'doctor' ? 'dottore' : userType == 'patient' ? 'paziente' : userType,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              const TextSpan(text: '? This action cannot be undone.'),
+              const TextSpan(text: '? Questa azione non può essere annullata.'),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: const Text('Annulla'),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -734,7 +743,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                 DeleteUser(userId: userId, userType: userType),
               );
             },
-            child: const Text('Delete'),
+            child: const Text('Elimina'),
           ),
         ],
       ),

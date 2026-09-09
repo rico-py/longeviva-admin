@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../../../../backend/models/signup_request_model.dart';
 import '../../../../../shared/utils/colors.dart';
 import '../../../../../shared/utils/context_extensions.dart';
+import '../../../../../shared/localization/translation_extension.dart';
 import '../../../../../shared/widgets/custom_progress_indicator.dart';
 import '../../../../backend/bloc/signup_request_bloc.dart';
 import '../../../../shared/utils/secure_password_generator.dart';
@@ -48,7 +49,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Search by name, email, or professional registration...',
+                    hintText: 'Cerca per nome, email o registrazione professionale...',
                     prefixIcon: const Icon(Icons.search, color: CustomColors.verdeAbisso),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -86,7 +87,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                 },
                 icon: const Icon(Icons.refresh, color: Colors.white),
                 label: const Text(
-                  'Refresh',
+                  'Aggiorna',
                   style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -107,9 +108,9 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
             child: BlocConsumer<SignupRequestBloc, SignupRequestState>(
               listener: (context, state) {
                 if (state is SignupRequestApproved) {
-                  context.showSuccessAlert('Signup request approved successfully');
+                  context.showSuccessAlert('Richiesta approvata con successo');
                 } else if (state is SignupRequestRejected) {
-                  context.showSuccessAlert('Signup request rejected successfully');
+                  context.showSuccessAlert('Richiesta rifiutata con successo');
                 } else if (state is SignupRequestsBatchApproved) {
                   setState(() => _selectedIds.clear());
                   if (state.hasFailures) {
@@ -125,14 +126,18 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                     context.showSuccessAlert('${state.totalSuccessful} richieste rifiutate');
                   }
                 } else if (state is SignupRequestError) {
-                  context.showErrorAlert(state.message);
+                  final key = state.translationKey;
+                  final translated = key != null ? context.tr(key, args: state.translationArgs) : null;
+                  context.showErrorAlert(
+                    translated != null && translated != key ? translated : state.message,
+                  );
                 }
               },
               builder: (context, state) {
                 if (state is SignupRequestLoading) {
                   return const Center(
                     child: CustomProgressIndicator(
-                      message: "Loading signup requests...",
+                      message: "Caricamento richieste in corso...",
                       color: CustomColors.verdeAbisso,
                     ),
                   );
@@ -190,7 +195,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
 
                 return const Center(
                   child: Text(
-                    'No data available',
+                    'Nessun dato disponibile',
                     style: TextStyle(fontFamily: 'Montserrat'),
                   ),
                 );
@@ -214,7 +219,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
           ),
           const SizedBox(height: 16),
           Text(
-            'No signup requests found',
+            'Nessuna richiesta trovata',
             style: TextStyle(
               fontFamily: 'Montserrat',
               fontSize: 18,
@@ -233,7 +238,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                 });
               },
               icon: const Icon(Icons.clear),
-              label: const Text('Clear filters'),
+              label: const Text('Azzera filtri'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: CustomColors.verdeMare,
                 foregroundColor: Colors.white,
@@ -274,7 +279,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   const SizedBox(width: 8),
                   Flexible(
                     child: Text(
-                      'All Statuses',
+                      'Tutti gli stati',
                       style: TextStyle(
                         color: Colors.grey[700],
                         fontFamily: 'Montserrat',
@@ -292,7 +297,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   Icon(Icons.pending, size: 20, color: Colors.orange),
                   SizedBox(width: 8),
                   Flexible(
-                    child: Text('Pending', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
+                    child: Text('In attesa', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
                   ),
                 ],
               ),
@@ -304,7 +309,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   Icon(Icons.check_circle, size: 20, color: Colors.green),
                   SizedBox(width: 8),
                   Flexible(
-                    child: Text('Approved', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
+                    child: Text('Approvate', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
                   ),
                 ],
               ),
@@ -316,7 +321,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   Icon(Icons.cancel, size: 20, color: CustomColors.rossoSimone),
                   SizedBox(width: 8),
                   Flexible(
-                    child: Text('Rejected', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
+                    child: Text('Rifiutate', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
                   ),
                 ],
               ),
@@ -355,7 +360,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   const SizedBox(width: 8),
                   Flexible(
                     child: Text(
-                      'All Roles',
+                      'Tutti i ruoli',
                       style: TextStyle(
                         color: Colors.grey[700],
                         fontFamily: 'Montserrat',
@@ -409,7 +414,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   Icon(Icons.medical_services, size: 20, color: CustomColors.verdeMare),
                   SizedBox(width: 8),
                   Flexible(
-                    child: Text('Doctor', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
+                    child: Text('Dottore', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
                   ),
                 ],
               ),
@@ -421,7 +426,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   Icon(Icons.local_hospital, size: 20, color: CustomColors.verdeAbisso),
                   SizedBox(width: 8),
                   Flexible(
-                    child: Text('Clinic', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
+                    child: Text('Clinica', style: TextStyle(fontFamily: 'Montserrat'), overflow: TextOverflow.ellipsis),
                   ),
                 ],
               ),
@@ -704,7 +709,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
-                                  request.professionalRegistrationNumber ?? 'Registration pending',
+                                  request.professionalRegistrationNumber ?? 'Registrazione in attesa',
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                     fontFamily: 'Montserrat',
@@ -791,8 +796,8 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                                 Expanded(
                                   child: Text(
                                     request.hasValidProfessionalRegistration
-                                        ? 'Professional validation complete'
-                                        : 'Professional validation required',
+                                        ? 'Validazione professionale completata'
+                                        : 'Validazione professionale richiesta',
                                     style: TextStyle(
                                       color: request.hasValidProfessionalRegistration
                                           ? Colors.green
@@ -825,7 +830,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                       },
                       icon: const Icon(Icons.cancel, color: CustomColors.rossoSimone),
                       label: const Text(
-                        'Reject',
+                        'Rifiuta',
                         style: TextStyle(
                           color: CustomColors.rossoSimone,
                           fontFamily: 'Montserrat',
@@ -845,7 +850,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                       } : null, // Disable if not ready for approval
                       icon: const Icon(Icons.check_circle, color: Colors.white),
                       label: Text(
-                        request.hasValidProfessionalRegistration ? 'Approve' : 'Validation Required',
+                        request.hasValidProfessionalRegistration ? 'Approva' : 'Validazione richiesta',
                         style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'Montserrat',
@@ -930,7 +935,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
         builder: (context, setState) {
           return AlertDialog(
             title: const Text(
-              'Confirm Approval',
+              'Confermi l\'approvazione',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -942,7 +947,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Are you sure you want to approve this signup request? This will create a new user account.',
+                  'Confermi di voler approvare questa richiesta di registrazione? Verrà creato un nuovo account utente.',
                   style: TextStyle(fontFamily: 'Montserrat'),
                 ),
                 const SizedBox(height: 16),
@@ -955,7 +960,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                     });
                   },
                   showPasswordRequirements: false,
-                  helperText: 'User will be required to change on first login',
+                  helperText: 'L\'utente dovrà cambiarla al primo accesso',
                 ),
               ],
             ),
@@ -966,7 +971,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                   TextButton(
                     onPressed: () => Navigator.of(dialogContext).pop(),
                     child: const Text(
-                      'Cancel',
+                      'Annulla',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.grey,
@@ -990,7 +995,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                     },
                     icon: const Icon(Icons.check_circle, color: Colors.white),
                     label: const Text(
-                      'Approve',
+                      'Approva',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Montserrat',
@@ -1238,7 +1243,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
     context.showAnimatedDialog(
       dialogBuilder: (dialogContext) => AlertDialog(
         title: const Text(
-          'Confirm Rejection',
+          'Confermi il rifiuto',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
@@ -1250,14 +1255,14 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Are you sure you want to reject this signup request?',
+              'Confermi di voler rifiutare questa richiesta di registrazione?',
               style: TextStyle(fontFamily: 'Montserrat'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: reasonController,
               decoration: const InputDecoration(
-                labelText: 'Rejection Reason',
+                labelText: 'Motivo del rifiuto',
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,
@@ -1271,7 +1276,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
               TextButton(
                 onPressed: () => Navigator.of(dialogContext).pop(),
                 child: const Text(
-                  'Cancel',
+                  'Annulla',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.grey,
@@ -1291,7 +1296,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                 },
                 icon: const Icon(Icons.cancel, color: CustomColors.rossoSimone),
                 label: const Text(
-                  'Reject',
+                  'Rifiuta',
                   style: TextStyle(
                     color: CustomColors.rossoSimone,
                     fontFamily: 'Montserrat',

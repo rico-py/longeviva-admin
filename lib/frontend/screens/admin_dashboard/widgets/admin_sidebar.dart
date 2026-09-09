@@ -97,11 +97,11 @@ class AdminSidebar extends StatelessWidget {
                     _buildNavItem(
                       context,
                       index: 1,
-                      title: 'Signup Requests',
+                      title: 'Richieste di registrazione',
                       icon: Icons.app_registration,
                       badgeCount: pendingCount,
                     ),
-                    _buildNavItem(context, index: 2, title: 'User Management', icon: Icons.people),
+                    _buildNavItem(context, index: 2, title: 'Gestione utenti', icon: Icons.people),
                     _buildNavItem(context, index: 3, title: 'Rituali', icon: Icons.auto_awesome),
                     _buildNavItem(context, index: 4, title: 'Analytics Piattaforma', icon: Icons.bar_chart),
                     _buildNavItem(context, index: 5, title: 'Dottori', icon: Icons.medical_services),

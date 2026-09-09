@@ -108,7 +108,7 @@ class AdminHeader extends StatelessWidget {
                     value: 'profile',
                     child: ListTile(
                       leading: Icon(Icons.person, color: CustomColors.verdeAbisso),
-                      title: Text('My Profile', style: TextStyle(fontFamily: 'Montserrat')),
+                      title: Text('Il mio profilo', style: TextStyle(fontFamily: 'Montserrat')),
                       contentPadding: EdgeInsets.zero,
                       dense: true,
                     ),
@@ -117,7 +117,7 @@ class AdminHeader extends StatelessWidget {
                     value: 'settings',
                     child: ListTile(
                       leading: Icon(Icons.settings, color: CustomColors.verdeAbisso),
-                      title: Text('Settings', style: TextStyle(fontFamily: 'Montserrat')),
+                      title: Text('Impostazioni', style: TextStyle(fontFamily: 'Montserrat')),
                       contentPadding: EdgeInsets.zero,
                       dense: true,
                     ),
@@ -127,7 +127,7 @@ class AdminHeader extends StatelessWidget {
                     value: 'logout',
                     child: ListTile(
                       leading: Icon(Icons.logout, color: CustomColors.rossoSimone),
-                      title: Text('Logout', style: TextStyle(fontFamily: 'Montserrat', color: CustomColors.rossoSimone)),
+                      title: Text('Esci', style: TextStyle(fontFamily: 'Montserrat', color: CustomColors.rossoSimone)),
                       contentPadding: EdgeInsets.zero,
                       dense: true,
                     ),

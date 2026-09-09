@@ -18,7 +18,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
           children: [
             // Welcome message
             const Text(
-              'Welcome to the Admin Dashboard',
+              'Benvenuto nella dashboard amministrativa',
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 22,
@@ -30,7 +30,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
             const SizedBox(height: 8),
 
             Text(
-              'Here\'s an overview of your system',
+              'Ecco una panoramica del tuo sistema',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 14,
@@ -74,7 +74,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: _buildDashboardCard(
-                                    title: 'Total Users',
+                                    title: 'Utenti totali',
                                     value: totalUsers.toString(),
                                     icon: Icons.people,
                                     color: CustomColors.verdeAbisso,
@@ -83,7 +83,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _buildDashboardCard(
-                                    title: 'Doctors',
+                                    title: 'Dottori',
                                     value: doctorCount.toString(),
                                     icon: Icons.medical_services,
                                     color: CustomColors.verdeMare,
@@ -99,7 +99,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: _buildDashboardCard(
-                                    title: 'Patients',
+                                    title: 'Pazienti',
                                     value: patientCount.toString(),
                                     icon: Icons.personal_injury,
                                     color: CustomColors.verdeTropicale,
@@ -108,7 +108,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _buildDashboardCard(
-                                    title: 'Pending Requests',
+                                    title: 'Richieste in attesa',
                                     value: pendingSignupRequests.toString(),
                                     icon: Icons.app_registration,
                                     color: CustomColors.rossoSimone,
@@ -132,7 +132,7 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
 
             // System information
             const Text(
-              'System Information',
+              'Informazioni di sistema',
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 18,
@@ -154,13 +154,13 @@ class AdminDashboardHomeSmallScreenViewModel extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildInfoRow('Firebase Status', 'Connected', Icons.cloud_done, Colors.green),
+                    _buildInfoRow('Stato Firebase', 'Connesso', Icons.cloud_done, Colors.green),
                     const Divider(),
-                    _buildInfoRow('App Version', '1.0.0', Icons.info_outline, CustomColors.verdeAbisso),
+                    _buildInfoRow('Versione app', '1.0.0', Icons.info_outline, CustomColors.verdeAbisso),
                     const Divider(),
-                    _buildInfoRow('Last Backup', 'Today at 03:00 AM', Icons.backup, CustomColors.verdeMare),
+                    _buildInfoRow('Ultimo backup', 'Oggi alle 03:00', Icons.backup, CustomColors.verdeMare),
                     const Divider(),
-                    _buildInfoRow('System Load', 'Normal', Icons.speed, CustomColors.verdeTropicale),
+                    _buildInfoRow('Carico di sistema', 'Normale', Icons.speed, CustomColors.verdeTropicale),
                   ],
                 ),
               ),

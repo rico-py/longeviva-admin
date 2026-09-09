@@ -47,7 +47,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
-          'Reset Password',
+          'Reimposta password',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
@@ -57,24 +57,24 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'Enter your admin email address to receive password reset instructions.',
+              'Inserisci il tuo indirizzo email admin per ricevere le istruzioni di reset della password.',
               style: TextStyle(fontFamily: 'Montserrat'),
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: resetEmailController,
               decoration: const InputDecoration(
-                labelText: 'Email Address',
+                labelText: 'Indirizzo email',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.email),
               ),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
+                  return 'Inserisci la tua email';
                 }
                 if (!EmailValidator.validate(value)) {
-                  return 'Please enter a valid email';
+                  return 'Inserisci un\'email valida';
                 }
                 return null;
               },
@@ -84,7 +84,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Cancel'),
+            child: const Text('Annulla'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -100,7 +100,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
               backgroundColor: CustomColors.verdeAbisso,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Send Reset Email'),
+            child: const Text('Invia email di reset'),
           ),
         ],
       ),
@@ -119,7 +119,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
           context.showErrorAlert(state.message);
         } else if (state is PasswordResetSent) {
           context.showSuccessAlert(
-            'Password reset email sent to ${state.email}. Please check your inbox.',
+            'Email di reset inviata a ${state.email}. Controlla la tua casella di posta.',
           );
         }
       },
@@ -210,7 +210,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
 
         // Title
         const Text(
-          'Admin Portal',
+          'Portale amministratore',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 24,
@@ -222,7 +222,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
         const SizedBox(height: 8),
 
         const Text(
-          'Longeviva Healthcare Platform',
+          'Piattaforma sanitaria Longeviva',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 14,
@@ -242,8 +242,8 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
           TextFormField(
             controller: _emailController,
             decoration: InputDecoration(
-              labelText: 'Email Address',
-              hintText: 'Enter your admin email',
+              labelText: 'Indirizzo email',
+              hintText: 'Inserisci la tua email admin',
               prefixIcon: const Icon(Icons.email_outlined),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -259,10 +259,10 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter your email address';
+                return 'Inserisci il tuo indirizzo email';
               }
               if (!EmailValidator.validate(value)) {
-                return 'Please enter a valid email address';
+                return 'Inserisci un indirizzo email valido';
               }
               return null;
             },
@@ -276,7 +276,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
             obscureText: _obscurePassword,
             decoration: InputDecoration(
               labelText: 'Password',
-              hintText: 'Enter your password',
+              hintText: 'Inserisci la tua password',
               prefixIcon: const Icon(Icons.lock_outlined),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -301,10 +301,10 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter your password';
+                return 'Inserisci la tua password';
               }
               if (value.length < 6) {
-                return 'Password must be at least 6 characters';
+                return 'La password deve contenere almeno 6 caratteri';
               }
               return null;
             },
@@ -325,7 +325,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
                 activeColor: CustomColors.verdeAbisso,
               ),
               const Text(
-                'Remember me for 7 days',
+                'Ricordami per 7 giorni',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 14,
@@ -366,7 +366,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
               ),
             )
                 : const Text(
-              'Sign In',
+              'Accedi',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
@@ -383,7 +383,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
     return TextButton(
       onPressed: _showPasswordResetDialog,
       child: const Text(
-        'Forgot your password?',
+        'Password dimenticata?',
         style: TextStyle(
           fontFamily: 'Montserrat',
           color: CustomColors.verdeAbisso,
@@ -419,7 +419,7 @@ class _SimpleAdminLoginScreenState extends State<SimpleAdminLoginScreen> {
                 // TODO: Show terms of service
               },
               child: const Text(
-                'Terms',
+                'Termini',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey,

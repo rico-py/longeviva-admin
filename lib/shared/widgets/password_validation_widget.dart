@@ -31,8 +31,8 @@ class PasswordValidationWidget extends StatelessWidget {
             return TextField(
               controller: passwordController,
               decoration: InputDecoration(
-                labelText: 'Temporary Password',
-                helperText: helperText ?? 'User will be required to change on first login',
+                labelText: 'Password temporanea',
+                helperText: helperText ?? 'L\'utente dovrà cambiarla al primo accesso',
                 border: const OutlineInputBorder(),
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -41,13 +41,13 @@ class PasswordValidationWidget extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.refresh),
                       onPressed: onRegeneratePassword,
-                      tooltip: 'Generate new secure password',
+                      tooltip: 'Genera nuova password sicura',
                     ),
                     // Info button
                     IconButton(
                       icon: const Icon(Icons.info_outline),
                       onPressed: () => _showPasswordRequirements(context),
-                      tooltip: 'Password requirements',
+                      tooltip: 'Requisiti password',
                     ),
                   ],
                 ),
@@ -105,8 +105,8 @@ class PasswordValidationWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           validation['isValid']
-                              ? 'Password meets all security requirements'
-                              : validation['errorMessage'] ?? 'Password validation failed',
+                              ? 'La password soddisfa tutti i requisiti di sicurezza'
+                              : validation['errorMessage'] ?? 'Validazione password non riuscita',
                           style: TextStyle(
                             fontSize: 14,
                             color: validation['isValid'] ? Colors.green : Colors.orange,
@@ -130,7 +130,7 @@ class PasswordValidationWidget extends StatelessWidget {
                     Row(
                       children: [
                         const Text(
-                          'Strength: ',
+                          'Robustezza: ',
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: 'Montserrat',
@@ -169,11 +169,11 @@ class PasswordValidationWidget extends StatelessWidget {
 
   Widget _buildRequirementsList(Map<String, bool> requirements) {
     final requirementsList = [
-      {'key': 'minLength', 'label': 'At least 8 characters'},
-      {'key': 'lowercase', 'label': 'Contains lowercase letter'},
-      {'key': 'uppercase', 'label': 'Contains uppercase letter'},
-      {'key': 'number', 'label': 'Contains number'},
-      {'key': 'specialChar', 'label': 'Contains special character (@\$!%*?&)'},
+      {'key': 'minLength', 'label': 'Almeno 8 caratteri'},
+      {'key': 'lowercase', 'label': 'Contiene una lettera minuscola'},
+      {'key': 'uppercase', 'label': 'Contiene una lettera maiuscola'},
+      {'key': 'number', 'label': 'Contiene un numero'},
+      {'key': 'specialChar', 'label': 'Contiene un carattere speciale (@\$!%*?&)'},
     ];
 
     return Column(
@@ -220,7 +220,7 @@ class PasswordValidationWidget extends StatelessWidget {
             Icon(Icons.security, color: CustomColors.verdeAbisso),
             SizedBox(width: 8),
             Text(
-              'Password Security Requirements',
+              'Requisiti di sicurezza della password',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -234,7 +234,7 @@ class PasswordValidationWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'For maximum security, all temporary passwords must meet these requirements:',
+              'Per la massima sicurezza, tutte le password temporanee devono soddisfare questi requisiti:',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w500,
@@ -242,11 +242,11 @@ class PasswordValidationWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ...[
-              '✓ At least 8 characters long',
-              '✓ Contains lowercase letters (a-z)',
-              '✓ Contains uppercase letters (A-Z)',
-              '✓ Contains numbers (0-9)',
-              '✓ Contains special characters (@\$!%*?&)',
+              '✓ Almeno 8 caratteri',
+              '✓ Contiene lettere minuscole (a-z)',
+              '✓ Contiene lettere maiuscole (A-Z)',
+              '✓ Contiene numeri (0-9)',
+              '✓ Contiene caratteri speciali (@\$!%*?&)',
             ].map((req) => Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
@@ -280,7 +280,7 @@ class PasswordValidationWidget extends StatelessWidget {
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Users will be required to change this password on their first login for additional security.',
+                      'Per maggiore sicurezza, l\'utente dovrà cambiare questa password al primo accesso.',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.blue,
@@ -297,7 +297,7 @@ class PasswordValidationWidget extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text(
-              'Got it',
+              'Ho capito',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
@@ -325,7 +325,7 @@ class PasswordValidationHelper {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  validation['errorMessage'] ?? 'Password does not meet security requirements',
+                  validation['errorMessage'] ?? 'La password non soddisfa i requisiti di sicurezza',
                   style: const TextStyle(fontFamily: 'Montserrat'),
                 ),
               ),

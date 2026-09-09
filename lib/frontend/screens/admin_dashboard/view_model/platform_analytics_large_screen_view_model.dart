@@ -349,7 +349,7 @@ class _Content extends StatelessWidget {
             Row(
               children: [
                 Expanded(child: _kpiCard('Totali', '${_allRequests.length}', Icons.list_alt, CustomColors.verdeAbisso)),
-                Expanded(child: _kpiCard('Pending', '${_pending.length}', Icons.pending_actions, Colors.orange)),
+                Expanded(child: _kpiCard('In attesa', '${_pending.length}', Icons.pending_actions, Colors.orange)),
                 Expanded(child: _kpiCard('Approvate', '${_approved.length}', Icons.check_circle_outline, const Color(0xFF4CAF50))),
                 Expanded(child: _kpiCard('Rifiutate', '${_rejected.length}', Icons.cancel_outlined, CustomColors.rossoSimone)),
                 Expanded(child: _kpiCard('Tasso approvazione', '${(_approvalRate * 100).round()}%', Icons.percent, CustomColors.verdeMare)),

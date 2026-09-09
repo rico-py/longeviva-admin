@@ -19,22 +19,6 @@
             "windows": "1:471375608487:web:a2ef2330f2c85b49e8b982"
           }
         }
-      },
-      "ios": {
-        "default": {
-          "projectId": "longeviva-web-app-dev",
-          "appId": "1:471375608487:ios:63b8854bddb8d094e8b982",
-          "uploadDebugSymbols": false,
-          "fileOutput": "ios/Runner/GoogleService-Info.plist"
-        }
-      },
-      "macos": {
-        "default": {
-          "projectId": "longeviva-web-app-dev",
-          "appId": "1:471375608487:ios:63b8854bddb8d094e8b982",
-          "uploadDebugSymbols": false,
-          "fileOutput": "macos/Runner/GoogleService-Info.plist"
-        }
       }
     }
   },

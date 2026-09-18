@@ -6,7 +6,6 @@ import '../../../../backend/models/admin_model.dart';
 import '../landing_page/admin_dashboard_home_landing_page.dart';
 import '../landing_page/signup_requests_landing_page.dart';
 import '../landing_page/user_management_landing_page.dart';
-import '../landing_page/rituals_analytics_landing_page.dart';
 import '../landing_page/platform_analytics_landing_page.dart';
 import '../landing_page/doctors_landing_page.dart';
 import '../landing_page/patients_landing_page.dart';
@@ -121,27 +120,21 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
                 context: context,
               ),
               _buildDrawerItem(
-                title: 'Rituali',
-                icon: Icons.auto_awesome,
-                index: 3,
-                context: context,
-              ),
-              _buildDrawerItem(
                 title: 'Analisi della piattaforma',
                 icon: Icons.bar_chart,
-                index: 4,
+                index: 3,
                 context: context,
               ),
               _buildDrawerItem(
                 title: 'Dottori',
                 icon: Icons.medical_services,
-                index: 5,
+                index: 4,
                 context: context,
               ),
               _buildDrawerItem(
                 title: 'Pazienti',
                 icon: Icons.personal_injury,
-                index: 6,
+                index: 5,
                 context: context,
               ),
               const Divider(color: Colors.white30),
@@ -184,7 +177,6 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
                 AdminDashboardHome(),
                 SignupRequestsLandingPage(),
                 UsersManagementPageLandingPage(),
-                RitualsAnalyticsLandingPage(),
                 PlatformAnalyticsLandingPage(),
                 DoctorsLandingPage(),
                 PatientsLandingPage(),

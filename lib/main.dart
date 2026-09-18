@@ -9,7 +9,6 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'backend/bloc/admin_auth_bloc.dart';
 import 'backend/bloc/admin_bloc.dart';
-import 'backend/bloc/ritual_bloc.dart';
 import 'backend/bloc/platform_analytics_bloc.dart';
 import 'backend/bloc/doctors_bloc.dart';
 import 'backend/bloc/patients_bloc.dart';
@@ -118,11 +117,6 @@ class LongevivaAdminApp extends StatelessWidget {
           create: (context) => AdminOperationsBloc(
             adminController: AdminController(),
           ),
-        ),
-
-        // Ritual BLoC
-        BlocProvider<RitualBloc>(
-          create: (context) => RitualBloc(),
         ),
 
         // Platform Analytics BLoC

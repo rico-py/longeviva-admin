@@ -5,7 +5,6 @@ import '../widgets/admin_header.dart';
 import '../landing_page/admin_dashboard_home_landing_page.dart';
 import '../landing_page/signup_requests_landing_page.dart';
 import '../landing_page/user_management_landing_page.dart';
-import '../landing_page/rituals_analytics_landing_page.dart';
 import '../landing_page/platform_analytics_landing_page.dart';
 import '../landing_page/doctors_landing_page.dart';
 import '../landing_page/patients_landing_page.dart';
@@ -57,7 +56,6 @@ class AdminDashboardLargeScreenViewModel extends StatelessWidget {
                       AdminDashboardHome(),
                       SignupRequestsLandingPage(),
                       UsersManagementPageLandingPage(),
-                      RitualsAnalyticsLandingPage(),
                       PlatformAnalyticsLandingPage(),
                       DoctorsLandingPage(),
                       PatientsLandingPage(),

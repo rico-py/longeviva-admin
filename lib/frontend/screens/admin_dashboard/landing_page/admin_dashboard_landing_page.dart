@@ -5,7 +5,6 @@ import '../../../../backend/bloc/admin_bloc.dart';
 import '../../../../backend/bloc/doctors_bloc.dart';
 import '../../../../backend/bloc/patients_bloc.dart';
 import '../../../../backend/bloc/platform_analytics_bloc.dart';
-import '../../../../backend/bloc/ritual_bloc.dart';
 import '../../../../backend/bloc/signup_request_bloc.dart';
 import '../../../../backend/models/admin_model.dart';
 import '../../../../shared/utils/error_handler.dart';
@@ -64,15 +63,12 @@ class _AdminDashboardLandingPageState
         }
         break;
       case 3:
-        context.read<RitualBloc>().add(LoadRitualAnalytics());
-        break;
-      case 4:
         context.read<PlatformAnalyticsBloc>().add(LoadPlatformAnalytics());
         break;
-      case 5:
+      case 4:
         context.read<DoctorsBloc>().add(LoadDoctors());
         break;
-      case 6:
+      case 5:
         context.read<PatientsBloc>().add(LoadPatients());
         break;
     }
@@ -128,12 +124,10 @@ class _AdminDashboardLandingPageState
       case 2:
         return 'Gestione utenti';
       case 3:
-        return 'Rituali';
-      case 4:
         return 'Analisi della piattaforma';
-      case 5:
+      case 4:
         return 'Dottori';
-      case 6:
+      case 5:
         return 'Pazienti';
       default:
         return 'Dashboard';

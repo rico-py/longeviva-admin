@@ -102,10 +102,9 @@ class AdminSidebar extends StatelessWidget {
                       badgeCount: pendingCount,
                     ),
                     _buildNavItem(context, index: 2, title: 'Gestione utenti', icon: Icons.people),
-                    _buildNavItem(context, index: 3, title: 'Rituali', icon: Icons.auto_awesome),
-                    _buildNavItem(context, index: 4, title: 'Analisi della piattaforma', icon: Icons.bar_chart),
-                    _buildNavItem(context, index: 5, title: 'Dottori', icon: Icons.medical_services),
-                    _buildNavItem(context, index: 6, title: 'Pazienti', icon: Icons.personal_injury),
+                    _buildNavItem(context, index: 3, title: 'Analisi della piattaforma', icon: Icons.bar_chart),
+                    _buildNavItem(context, index: 4, title: 'Dottori', icon: Icons.medical_services),
+                    _buildNavItem(context, index: 5, title: 'Pazienti', icon: Icons.personal_injury),
                   ],
                 );
               },

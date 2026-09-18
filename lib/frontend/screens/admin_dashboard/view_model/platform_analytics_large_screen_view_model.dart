@@ -301,7 +301,7 @@ class _Content extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Analytics Piattaforma',
+                      'Analisi della piattaforma',
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 28,
@@ -352,7 +352,7 @@ class _Content extends StatelessWidget {
                 Expanded(child: _kpiCard('In attesa', '${_pending.length}', Icons.pending_actions, Colors.orange)),
                 Expanded(child: _kpiCard('Approvate', '${_approved.length}', Icons.check_circle_outline, const Color(0xFF4CAF50))),
                 Expanded(child: _kpiCard('Rifiutate', '${_rejected.length}', Icons.cancel_outlined, CustomColors.rossoSimone)),
-                Expanded(child: _kpiCard('Tasso approvazione', '${(_approvalRate * 100).round()}%', Icons.percent, CustomColors.verdeMare)),
+                Expanded(child: _kpiCard('Tasso di approvazione', '${(_approvalRate * 100).round()}%', Icons.percent, CustomColors.verdeMare)),
               ],
             ),
 
@@ -377,10 +377,10 @@ class _Content extends StatelessWidget {
             Row(
               children: [
                 Expanded(child: _kpiCard('Totali', '${_doctors.length}', Icons.people_outline, CustomColors.verdeAbisso)),
-                Expanded(child: _kpiCard('Setup completato', '$_setupCompleted', Icons.task_alt, const Color(0xFF4CAF50))),
-                Expanded(child: _kpiCard('Setup incompleto', '$_setupIncomplete', Icons.pending_outlined, Colors.orange)),
+                Expanded(child: _kpiCard('Configurazione completata', '$_setupCompleted', Icons.task_alt, const Color(0xFF4CAF50))),
+                Expanded(child: _kpiCard('Configurazione incompleta', '$_setupIncomplete', Icons.pending_outlined, Colors.orange)),
                 Expanded(child: _kpiCard('Multi-ruolo', '$_multiRoleCount', Icons.account_tree_outlined, Colors.purple)),
-                Expanded(child: _kpiCard('% setup ok', _doctors.isEmpty ? 'N/D' : '${((_setupCompleted / _doctors.length) * 100).round()}%', Icons.percent, CustomColors.verdeMare)),
+                Expanded(child: _kpiCard('% setup ok', _doctors.isEmpty ? 'N.D.' : '${((_setupCompleted / _doctors.length) * 100).round()}%', Icons.percent, CustomColors.verdeMare)),
               ],
             ),
 
@@ -475,7 +475,7 @@ class _Content extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
-                          '$days gg',
+                          '$days giorni',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 12,
@@ -791,7 +791,7 @@ class _Content extends StatelessWidget {
     if (list.isEmpty) return const SizedBox.shrink();
 
     return _card(
-      title: 'Professionisti senza setup servizi completato',
+      title: 'Professionisti con configurazione servizi incompleta',
       icon: Icons.pending_outlined,
       iconColor: Colors.orange,
       child: Column(
@@ -809,7 +809,7 @@ class _Content extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Setup completato: $_setupCompleted / ${_doctors.length}',
+                            'Configurazione completata: $_setupCompleted / ${_doctors.length}',
                             style: const TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 13,
@@ -1111,7 +1111,7 @@ class _Content extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader('Crescita & Mercato', Icons.show_chart),
+        _sectionHeader('Crescita e mercato', Icons.show_chart),
         const SizedBox(height: 16),
 
         Row(
@@ -1119,7 +1119,7 @@ class _Content extends StatelessWidget {
             Expanded(
               child: _kpiCard(
                 'Potenziale mensile*',
-                _revenuePotential == 0 ? 'N/D' : _formatEuro(_revenuePotential),
+                _revenuePotential == 0 ? 'N.D.' : _formatEuro(_revenuePotential),
                 Icons.monetization_on_outlined,
                 Colors.amber.shade700,
               ),
@@ -1127,7 +1127,7 @@ class _Content extends StatelessWidget {
             Expanded(
               child: _kpiCard(
                 'Tariffa media',
-                _avgFee == 0 ? 'N/D' : '€${_avgFee.toStringAsFixed(0)}/h',
+                _avgFee == 0 ? 'N.D.' : '€${_avgFee.toStringAsFixed(0)}/h',
                 Icons.euro_outlined,
                 CustomColors.verdeMare,
               ),
@@ -1135,7 +1135,7 @@ class _Content extends StatelessWidget {
             Expanded(
               child: _kpiCard(
                 'Tariffa massima',
-                _maxFee == 0 ? 'N/D' : '€${_maxFee.toStringAsFixed(0)}/h',
+                _maxFee == 0 ? 'N.D.' : '€${_maxFee.toStringAsFixed(0)}/h',
                 Icons.arrow_upward,
                 CustomColors.verdeAbisso,
               ),
@@ -1195,7 +1195,7 @@ class _Content extends StatelessWidget {
             Expanded(
               flex: 5,
               child: _card(
-                title: 'Top città per professionisti',
+                title: 'Principali città per professionisti',
                 icon: Icons.location_city_outlined,
                 iconColor: CustomColors.verdeTropicale,
                 child: doctorCities.isEmpty
@@ -1271,7 +1271,7 @@ class _Content extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: Text('Ratio P/Prof.',
+                child: Text('Rapporto P/Prof.',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 11,
@@ -1350,11 +1350,11 @@ class _Content extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _sectionHeader(
-            'Matching Pazienti — Professionisti',
+            'Abbinamento pazienti-professionisti',
             Icons.connect_without_contact_outlined),
         const SizedBox(height: 8),
         Text(
-          'Pazienti senza professionista e professionisti senza pazienti. Agire su questi riduce il churn e aumenta l\'utilizzo della piattaforma.',
+          'Pazienti senza professionista e professionisti senza pazienti. Agire su questi riduce l\'abbandono e aumenta l\'utilizzo della piattaforma.',
           style: TextStyle(
               fontFamily: 'Montserrat', fontSize: 13, color: Colors.grey[600]),
         ),
@@ -1372,7 +1372,7 @@ class _Content extends StatelessWidget {
                     '${(_assignmentRate * 100).round()}%',
                     Icons.check_circle_outline, const Color(0xFF4CAF50))),
             Expanded(
-                child: _kpiCard('Città con match immediato', '$matchCount',
+                child: _kpiCard('Città con abbinamento immediato', '$matchCount',
                     Icons.auto_awesome_outlined, CustomColors.verdeMare)),
           ],
         ),
@@ -1462,7 +1462,7 @@ class _Content extends StatelessWidget {
                                             BorderRadius.circular(8),
                                       ),
                                       child: Text(
-                                        '$sinceDate gg',
+                                        '$sinceDate giorni',
                                         style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 10,
@@ -1584,14 +1584,14 @@ class _Content extends StatelessWidget {
         if (opportunities.isNotEmpty) ...[
           const SizedBox(height: 16),
           _card(
-            title: 'Opportunità di matching per città',
+            title: 'Opportunità di abbinamento per città',
             icon: Icons.auto_awesome_outlined,
             iconColor: CustomColors.verdeMare,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Città con pazienti in attesa. Le righe "Match!" hanno professionisti locali disponibili.',
+                  'Città con pazienti in attesa. Le righe "Abbinato" hanno professionisti locali disponibili.',
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -1695,7 +1695,7 @@ class _Content extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                isMatch ? 'Match!' : 'In attesa',
+                                isMatch ? 'Abbinato' : 'In attesa',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 10,

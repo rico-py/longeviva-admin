@@ -518,7 +518,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                             Icon(statusIcon, color: statusColor, size: 16),
                             const SizedBox(width: 4),
                             Text(
-                              status.toUpperCase(),
+                              _statusLabel(status),
                               style: TextStyle(
                                 color: statusColor,
                                 fontWeight: FontWeight.bold,
@@ -534,7 +534,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
 
                   // Request timestamp
                   Text(
-                    'Requested on ${DateFormat('MMM d, yyyy').format(request.requestedAt)}',
+                    'Richiesta del ${DateFormat('d MMMM yyyy', 'it_IT').format(request.requestedAt)}',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
@@ -726,7 +726,7 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
-                                  'VAT: ${request.vatNumber}',
+                                  'P.IVA: ${request.vatNumber}',
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                     fontFamily: 'Montserrat',
@@ -921,6 +921,18 @@ class _SignupRequestsLargeScreenViewModelState extends State<SignupRequestsLarge
         return Icons.local_hospital;
       default:
         return Icons.person;
+    }
+  }
+
+  // Human-readable Italian label for the request status
+  String _statusLabel(String status) {
+    switch (status) {
+      case 'approved':
+        return 'APPROVATA';
+      case 'rejected':
+        return 'RIFIUTATA';
+      default:
+        return 'IN ATTESA';
     }
   }
 

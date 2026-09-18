@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'backend/bloc/admin_auth_bloc.dart';
 import 'backend/bloc/admin_bloc.dart';
@@ -44,6 +45,12 @@ Future<void> main() async {
       ErrorHandler.logInfo('⚠️ File .env non trovato (normale in produzione): $e');
       // In produzione il file .env non esiste, ed è normale
     }
+
+    // ========================================
+    // STEP 1b: Inizializza i dati di formattazione data/ora in italiano
+    // ========================================
+    await initializeDateFormatting('it_IT');
+    await initializeDateFormatting('it');
 
     // ========================================
     // STEP 2: Inizializza la configurazione ambiente

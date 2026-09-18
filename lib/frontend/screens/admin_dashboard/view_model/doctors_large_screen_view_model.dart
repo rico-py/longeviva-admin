@@ -198,7 +198,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
 
   void _exportCsv(List<Doctor> doctors) {
     final buffer = StringBuffer();
-    buffer.writeln('Cognome,Nome,Email,"Ruolo/i",Sesso,Età,Città,"Tariffa (€/h)","Setup completato","Iscritto il"');
+    buffer.writeln('Cognome,Nome,Email,"Ruolo/i",Sesso,Età,Città,"Tariffa (€/h)","Configurazione completata","Iscritto il"');
     String esc(String s) => '"${s.replaceAll('"', '""')}"';
     for (final d in doctors) {
       final age = _ageOf(d);
@@ -309,7 +309,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      '$daysLeft gg',
+                      '$daysLeft giorni',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 13,
@@ -483,11 +483,11 @@ class _DoctorsContentState extends State<_DoctorsContent> {
           ),
           const SizedBox(height: 8),
           _filterRow(
-            label: 'Setup',
+            label: 'Configurazione',
             chips: [
-              _boolChip('Completato', true, _setupFilter,
+              _boolChip('Completa', true, _setupFilter,
                   (v) => setState(() => _setupFilter = v)),
-              _boolChip('Incompleto', false, _setupFilter,
+              _boolChip('Incompleta', false, _setupFilter,
                   (v) => setState(() => _setupFilter = v)),
             ],
           ),
@@ -599,7 +599,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                 Icons.euro, Colors.indigo)),
         const SizedBox(width: 12),
         Expanded(
-            child: _kpi('${setupPct.toStringAsFixed(0)}%', 'Setup completato',
+            child: _kpi('${setupPct.toStringAsFixed(0)}%', 'Configurazione completata',
                 Icons.settings_suggest, Colors.teal)),
         const SizedBox(width: 12),
         Expanded(
@@ -728,7 +728,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _chartTitle('Top città'),
+          _chartTitle('Principali città'),
           const SizedBox(height: 12),
           if (top.isEmpty)
             const Text('Nessun dato',
@@ -810,7 +810,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
 
   Widget _tableHeader() {
     Widget col(String label, String sortKey, int flex,
-        {bool sortable = true}) {
+        {bool sortable = true, bool centered = false}) {
       final isActive = _sortBy == sortKey;
       return Expanded(
         flex: flex,
@@ -841,6 +841,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
               )
             : Text(
                 label,
+                textAlign: centered ? TextAlign.center : null,
                 style: const TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
@@ -861,7 +862,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
           col('Età', 'age', 1),
           col('Città', 'city', 2),
           col('Tariffa', 'fee', 1),
-          col('Setup', 'setup', 1, sortable: false),
+          col('Stato', 'setup', 1, sortable: false, centered: true),
           col('Iscritto il', 'date', 2),
         ],
       ),
@@ -1111,7 +1112,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
             .length,
       ),
       (
-        key: 'Issuer / Ente',
+        key: 'Ente di rilascio',
         count: doctors.where((d) => d.issuer.isNotEmpty).length,
       ),
       (
@@ -1473,7 +1474,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
     }
 
     final bands = [
-      (label: 'Under 30', color: const Color(0xFF4CAF50), icon: Icons.person_outline,    minAge: 0,  maxAge: 29),
+      (label: '< 30',     color: const Color(0xFF4CAF50), icon: Icons.person_outline,    minAge: 0,  maxAge: 29),
       (label: '30 – 40',  color: const Color(0xFF2196F3), icon: Icons.person,             minAge: 30, maxAge: 40),
       (label: '41 – 50',  color: const Color(0xFFFF9800), icon: Icons.person_2_outlined,  minAge: 41, maxAge: 50),
       (label: '50+',      color: const Color(0xFF9C27B0), icon: Icons.person_3_outlined,  minAge: 51, maxAge: 999),
@@ -1547,9 +1548,9 @@ class _DoctorsContentState extends State<_DoctorsContent> {
             .first
             .key;
     return {
-      'Età media': '$avgAge aa',
+      'Età media': '$avgAge anni',
       'Tariffa media': '€$avgFee/h',
-      'Setup ok': '$setupDone/${members.length}',
+      'Configurazione completa': '$setupDone/${members.length}',
       'Città top': topCity,
     };
   }
@@ -1962,9 +1963,9 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 36,
+                                          width: 48,
                                           child: Text(
-                                            '$age aa',
+                                            '$age anni',
                                             style: const TextStyle(
                                                 fontFamily: 'Montserrat',
                                                 fontSize: 12),
@@ -1972,8 +1973,8 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                                         ),
                                         Tooltip(
                                           message: d.hasCompletedServiceSetup
-                                              ? 'Setup completato'
-                                              : 'Setup incompleto',
+                                              ? 'Configurazione completata'
+                                              : 'Configurazione incompleta',
                                           child: Icon(
                                             d.hasCompletedServiceSetup
                                                 ? Icons.check_circle
@@ -2201,12 +2202,12 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                     'Tariffa media', Icons.euro_outlined, Colors.indigo)),
             const SizedBox(width: 12),
             Expanded(
-                child: _kpi('${avgAge.toStringAsFixed(0)} aa', 'Età media',
+                child: _kpi('${avgAge.toStringAsFixed(0)} anni', 'Età media',
                     Icons.cake_outlined, Colors.blueGrey)),
             const SizedBox(width: 12),
             Expanded(
                 child: _kpi('${setupPct.toStringAsFixed(0)}%',
-                    'Setup completato',
+                    'Configurazione completata',
                     Icons.settings_suggest_outlined, Colors.teal)),
             const SizedBox(width: 12),
             Expanded(
@@ -2283,7 +2284,7 @@ class _DoctorsContentState extends State<_DoctorsContent> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _chartTitle('Top città di lavoro'),
+                    _chartTitle('Principali città di lavoro'),
                     const SizedBox(height: 12),
                     if (cities.isEmpty)
                       const Text('Nessun dato',

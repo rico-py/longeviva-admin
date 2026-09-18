@@ -74,7 +74,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
 
   // NEW: Helper method to format roles list for display
   List<String> _getRoleDisplayNames(dynamic rolesData) {
-    if (rolesData == null) return ['N/A'];
+    if (rolesData == null) return ['N.D.'];
 
     List<String> roles = [];
     if (rolesData is List) {
@@ -596,13 +596,13 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildDetailItem('Nome', '${user['name']} ${user['surname'] ?? ''}'),
-                      _buildDetailItem('Email', user['email'] ?? 'N/D'),
+                      _buildDetailItem('Email', user['email'] ?? 'N.D.'),
                       _buildDetailItem('Tipo utente', userType == 'doctor' ? 'Dottore' : userType == 'patient' ? 'Paziente' : capitalize(userType)),
 
                       if (userType == 'doctor') ...[
                         // UPDATED: Show all roles instead of single role
                         _buildDetailItem('Ruoli', userRoles.join(', ')),
-                        _buildDetailItem('Specialità', user['specialty'] ?? 'N/D'),
+                        _buildDetailItem('Specialità', user['specialty'] ?? 'N.D.'),
                         if (user['cityOfWork'] != null)
                           _buildDetailItem('Città di lavoro', user['cityOfWork']),
                         // NEW: Show country of work
@@ -717,7 +717,7 @@ class _UserManagementSmallScreenViewModelState extends State<UserManagementSmall
               color: Colors.black87,
             ),
             children: [
-              const TextSpan(text: 'Confermi di voler eliminare questo/a '),
+              const TextSpan(text: 'Confermi di voler eliminare questo '),
               TextSpan(
                 text: userType == 'doctor' ? 'dottore' : userType == 'patient' ? 'paziente' : userType,
                 style: const TextStyle(fontWeight: FontWeight.bold),

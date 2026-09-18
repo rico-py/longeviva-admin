@@ -497,7 +497,7 @@ class _SignupRequestsSmallScreenViewModelState
                         Icon(statusIcon, color: statusColor, size: 16),
                         const SizedBox(width: 4),
                         Text(
-                          status.toUpperCase(),
+                          _statusLabel(status),
                           style: TextStyle(
                             color: statusColor,
                             fontWeight: FontWeight.bold,
@@ -509,7 +509,7 @@ class _SignupRequestsSmallScreenViewModelState
                     ),
                   ),
                   Text(
-                    'Il ${DateFormat('MMM d, yy').format(request.requestedAt)}', // Shorter date
+                    'Del ${DateFormat('d MMM yyyy', 'it_IT').format(request.requestedAt)}', // Shorter date
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
@@ -795,6 +795,18 @@ class _SignupRequestsSmallScreenViewModelState
         return Icons.local_hospital;
       default:
         return Icons.person; // Default icon
+    }
+  }
+
+  // Human-readable Italian label for the request status
+  String _statusLabel(String status) {
+    switch (status) {
+      case 'approved':
+        return 'APPROVATA';
+      case 'rejected':
+        return 'RIFIUTATA';
+      default:
+        return 'IN ATTESA';
     }
   }
 

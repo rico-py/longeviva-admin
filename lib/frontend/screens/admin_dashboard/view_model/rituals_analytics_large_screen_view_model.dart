@@ -162,7 +162,7 @@ class _RitualsAnalyticsContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Analytics Rituali',
+                      'Analisi dei rituali',
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 28,
@@ -282,7 +282,7 @@ class _RitualsAnalyticsContent extends StatelessWidget {
           child: _kpiCard(
             label: 'Prezzo medio',
             value: avgPrice == 0
-                ? 'N/D'
+                ? 'N.D.'
                 : '€${avgPrice.toStringAsFixed(0)}',
             icon: Icons.euro_outlined,
             color: Colors.amber.shade700,
@@ -993,7 +993,7 @@ class _RitualDetailPanel extends StatelessWidget {
                   if (ritual.isFeatured)
                     _badge('In evidenza', Colors.amber.shade700),
                   if (rank != null)
-                    _badge('Top #$rank', Colors.white.withOpacity(0.25)),
+                    _badge('$rank° posto', Colors.white.withOpacity(0.25)),
                 ],
               ),
             ],
@@ -1029,7 +1029,7 @@ class _RitualDetailPanel extends StatelessWidget {
                     Expanded(
                       child: _statBox(
                         Icons.calendar_today_outlined,
-                        '${ritual.durationDays} gg',
+                        '${ritual.durationDays} giorni',
                         'Durata',
                       ),
                     ),
@@ -1052,7 +1052,7 @@ class _RitualDetailPanel extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Insight utilizzo',
+                        'Analisi dell\'utilizzo',
                         style: TextStyle(
                           fontFamily: 'Nunito',
                           fontSize: 14,

@@ -122,7 +122,7 @@ class _SignupRequestDetailsState extends State<SignupRequestDetails> {
                         if (widget.request.birthdate != null)
                           _buildDetailRow(
                               'Data di nascita',
-                              DateFormat('MMMM dd, yyyy')
+                              DateFormat('d MMMM yyyy', 'it_IT')
                                   .format(widget.request.birthdate!)),
                         _buildDetailRow(
                             'Codice fiscale', widget.request.fiscalCode),
@@ -172,7 +172,7 @@ class _SignupRequestDetailsState extends State<SignupRequestDetails> {
                             _buildDetailRow('Area di interesse', widget.request.areaOfInterest!),
                           if (widget.request.qualificationValidity != null)
                             _buildDetailRow('Validità qualifica',
-                                DateFormat('MMMM dd, yyyy').format(widget.request.qualificationValidity!)),
+                                DateFormat('d MMMM yyyy', 'it_IT').format(widget.request.qualificationValidity!)),
                           // NEW: Show professional validation status
                           _buildValidationStatusRow(),
                         ],
@@ -208,7 +208,7 @@ class _SignupRequestDetailsState extends State<SignupRequestDetails> {
                             'Lingue parlate', widget.request.languagesSpoken),
                         _buildDetailRow(
                             'Data richiesta',
-                            DateFormat('MMMM dd, yyyy \'at\' HH:mm')
+                            DateFormat('d MMMM yyyy \'alle\' HH:mm', 'it_IT')
                                 .format(widget.request.requestedAt)),
                       ],
                     ),
@@ -422,7 +422,7 @@ class _SignupRequestDetailsState extends State<SignupRequestDetails> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Inviata il ${DateFormat('MMMM dd, yyyy \'at\' HH:mm').format(request.requestedAt)}',
+                  'Inviata il ${DateFormat('d MMMM yyyy \'alle\' HH:mm', 'it_IT').format(request.requestedAt)}',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.grey[700],
@@ -676,7 +676,7 @@ class _SignupRequestDetailsState extends State<SignupRequestDetails> {
       children: [
         _buildDetailRow(
           'Data elaborazione',
-          DateFormat('MMMM dd, yyyy \'at\' HH:mm')
+          DateFormat('d MMMM yyyy \'alle\' HH:mm', 'it_IT')
               .format(widget.request.processedAt!),
         ),
         if (widget.request.status == 'rejected' &&

@@ -209,7 +209,7 @@ class _PatientsContentState extends State<_PatientsContent> {
 
     final buffer = StringBuffer();
     buffer.writeln(
-        'Cognome,Nome,Email,Sesso,Età,Città,"Dottore assegnato","Onboarding completato","Iscritto il"');
+        'Cognome,Nome,Email,Sesso,Età,Città,"Dottore assegnato","Profilo completato","Iscritto il"');
 
     for (final p in patients) {
       final age = _ageOf(p);
@@ -268,7 +268,7 @@ class _PatientsContentState extends State<_PatientsContent> {
         Row(
           children: [
             const Text(
-              'Insight Clinici',
+              'Approfondimenti clinici',
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 20,
@@ -322,7 +322,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                 total == 0
                     ? '—'
                     : '${(onboarded / total * 100).round()}%',
-                'Onboarding completato',
+                'Profilo completato',
                 Icons.task_alt,
                 const Color(0xFF4CAF50),
               ),
@@ -550,9 +550,9 @@ class _PatientsContentState extends State<_PatientsContent> {
           ),
           const SizedBox(height: 8),
           _filterRow(
-            'Onboarding',
+            'Profilo',
             [
-              _boolChip('Completato', true, _onboardingFilter,
+              _boolChip('Completo', true, _onboardingFilter,
                   (v) => setState(() => _onboardingFilter = v)),
               _boolChip('Incompleto', false, _onboardingFilter,
                   (v) => setState(() => _onboardingFilter = v)),
@@ -596,7 +596,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                 CustomColors.verdeAbisso)),
         Expanded(
             child: _kpi(
-                avgAge == null ? 'N/D' : avgAge.toStringAsFixed(1),
+                avgAge == null ? 'N.D.' : avgAge.toStringAsFixed(1),
                 'Età media',
                 Icons.cake_outlined,
                 CustomColors.verdeMare)),
@@ -607,7 +607,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                 Icons.medical_services_outlined,
                 const Color(0xFF4CAF50))),
         Expanded(
-            child: _kpi('${pctOnboarding.round()}%', 'Onboarding completato',
+            child: _kpi('${pctOnboarding.round()}%', 'Profilo completato',
                 Icons.task_alt, Colors.orange)),
         Expanded(
             child: _kpi('$lastMonth', 'Iscritti ultimo mese',
@@ -846,7 +846,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                 const Expanded(
                   flex: 1,
                   child: Text(
-                    'Onboarding',
+                    'Profilo',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -1217,7 +1217,7 @@ class _PatientsContentState extends State<_PatientsContent> {
               const SizedBox(width: 8),
               const Expanded(
                 child: Text(
-                  'Pazienti a rischio churn',
+                  'Pazienti a rischio di abbandono',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,
@@ -1328,7 +1328,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        '$daysInactive gg inattivo',
+                        '$daysInactive giorni di inattività',
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 11,
@@ -1497,7 +1497,7 @@ class _PatientsContentState extends State<_PatientsContent> {
 
   Widget _clusterByAge() {
     final bands = [
-      (label: 'Under 18', color: Colors.teal,             icon: Icons.child_care_outlined,  minAge: 0,  maxAge: 17),
+      (label: '< 18',     color: Colors.teal,             icon: Icons.child_care_outlined,  minAge: 0,  maxAge: 17),
       (label: '18 – 30',  color: const Color(0xFF4CAF50), icon: Icons.person_outline,        minAge: 18, maxAge: 30),
       (label: '31 – 50',  color: const Color(0xFF2196F3), icon: Icons.person,                minAge: 31, maxAge: 50),
       (label: '50+',      color: const Color(0xFF9C27B0), icon: Icons.person_3_outlined,     minAge: 51, maxAge: 999),
@@ -1532,8 +1532,8 @@ class _PatientsContentState extends State<_PatientsContent> {
     return _clusterGrid([
       (label: 'Con dottore assegnato',    color: const Color(0xFF4CAF50), icon: Icons.medical_services_outlined, members: withDoc,      total: widget.patients.length),
       (label: 'Senza dottore assegnato',  color: Colors.orange,           icon: Icons.person_search_outlined,    members: withoutDoc,   total: widget.patients.length),
-      (label: 'Onboarding completato',    color: CustomColors.verdeMare,  icon: Icons.task_alt,                  members: onboarded,    total: widget.patients.length),
-      (label: 'Onboarding incompleto',    color: Colors.grey,             icon: Icons.pending_outlined,          members: notOnboarded, total: widget.patients.length),
+      (label: 'Profilo completato',    color: CustomColors.verdeMare,  icon: Icons.task_alt,                  members: onboarded,    total: widget.patients.length),
+      (label: 'Profilo incompleto',    color: Colors.grey,             icon: Icons.pending_outlined,          members: notOnboarded, total: widget.patients.length),
     ]);
   }
 
@@ -1555,7 +1555,7 @@ class _PatientsContentState extends State<_PatientsContent> {
         })
         .toList();
     final avgAgeStr = ages.isEmpty
-        ? 'N/D'
+        ? 'N.D.'
         : '${(ages.fold(0, (s, a) => s + a) / ages.length).toStringAsFixed(0)} aa';
     final withDoc = members.where((p) => p.assignedDoctorId != null).length;
     final f = members.where((p) => p.sex.trim().toUpperCase() == 'F').length;
@@ -2029,8 +2029,8 @@ class _PatientsContentState extends State<_PatientsContent> {
                                         const SizedBox(width: 8),
                                         Tooltip(
                                           message: p.hasCompletedOnboarding
-                                              ? 'Onboarding completato'
-                                              : 'Onboarding incompleto',
+                                              ? 'Profilo completato'
+                                              : 'Profilo incompleto',
                                           child: Icon(
                                             p.hasCompletedOnboarding
                                                 ? Icons.task_alt
@@ -2086,7 +2086,7 @@ class _PatientsContentState extends State<_PatientsContent> {
       final ageGroup = age < 0
           ? 'N.D.'
           : age < 18
-              ? 'Under 18'
+              ? '< 18'
               : age <= 30
                   ? '18–30'
                   : age <= 50
@@ -2375,7 +2375,7 @@ class _PatientsContentState extends State<_PatientsContent> {
                     _cerchiaStat('$withDoc / ${members.length}',
                         'Con dottore assegnato', const Color(0xFF4CAF50)),
                     _cerchiaStat('$onboarded / ${members.length}',
-                        'Onboarding completato', Colors.teal),
+                        'Profilo completato', Colors.teal),
                     _cerchiaStat(
                         stats['Età media'] ?? '—', 'Età media', Colors.indigo),
                     _cerchiaStat(

@@ -109,13 +109,13 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
                 context: context
               ),
               _buildDrawerItem(
-                title: 'Signup Requests',
+                title: 'Richieste di registrazione',
                 icon: Icons.app_registration,
                 index: 1,
                 context: context
               ),
               _buildDrawerItem(
-                title: 'User Management',
+                title: 'Gestione utenti',
                 icon: Icons.people,
                 index: 2,
                 context: context,
@@ -127,7 +127,7 @@ class AdminDashboardSmallScreenViewModel extends StatelessWidget {
                 context: context,
               ),
               _buildDrawerItem(
-                title: 'Analytics Piattaforma',
+                title: 'Analisi della piattaforma',
                 icon: Icons.bar_chart,
                 index: 4,
                 context: context,

@@ -236,9 +236,9 @@ class _HomeContent extends StatelessWidget {
               ),
               Expanded(
                 child: _kpiCard(
-                  'Tasso approvazione',
+                  'Tasso di approvazione',
                   allRequests.isEmpty
-                      ? 'N/D'
+                      ? 'N.D.'
                       : '${(approvalRate * 100).round()}%',
                   Icons.percent,
                   CustomColors.verdeAbisso,
@@ -275,7 +275,7 @@ class _HomeContent extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             const Text(
-                              'Richiede Attenzione',
+                              'Richiede attenzione',
                               style: TextStyle(
                                 fontFamily: 'Nunito',
                                 fontSize: 16,
@@ -304,7 +304,7 @@ class _HomeContent extends StatelessWidget {
                               color: Colors.orange,
                               title: '${pending.length} richieste pending',
                               subtitle:
-                                  'Da esaminare nella sezione Signup Requests',
+                                  'Da esaminare nella sezione Richieste di registrazione',
                             ),
                         ],
                         if (allRequests.isEmpty)
@@ -428,7 +428,7 @@ class _HomeContent extends StatelessWidget {
                           color: CustomColors.verdeAbisso, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        'Snapshot Richieste',
+                        'Riepilogo richieste',
                         style: TextStyle(
                           fontFamily: 'Nunito',
                           fontSize: 16,

@@ -130,7 +130,7 @@ class _AdminDashboardLandingPageState
       case 3:
         return 'Rituali';
       case 4:
-        return 'Analytics Piattaforma';
+        return 'Analisi della piattaforma';
       case 5:
         return 'Dottori';
       case 6:
